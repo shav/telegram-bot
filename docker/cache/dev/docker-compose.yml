@@ -1,0 +1,16 @@
+version: '2'
+services:
+  redis-dev:
+    image: redis:7.0
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_PORT_NUMBER=6379
+    ports:
+      - 6379:6379
+    volumes:
+      - ./data:/data
+      - ../redis.conf:/usr/local/etc/redis/redis.conf
+networks:
+  default:
+    name: tgbot-network
+    external: true

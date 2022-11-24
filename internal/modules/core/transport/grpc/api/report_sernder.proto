@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+option go_package = "github.com/shav/telegram-bot/internal/modules/core/transport/grpc/api";
+
+package core_transport_grpc;
+
+import "google/protobuf/empty.proto";
+
+// Сервис для отправки отчётов пользователю.
+service ReportSender {
+  // Отправляет отчёт пользователю.
+  rpc SendReport (SendReportRequest) returns (google.protobuf.Empty) {}
+}
+
+// Отчёт.
+message Report {
+  // Заголовок отчёта.
+  string title = 1;
+  // Содержимое отчёта.
+  string content = 2;
+}
+
+// Запрос на отправку отчёта пользователю.
+message SendReportRequest {
+  // Отчёт.
+  Report report = 1;
+  // ИД пользователя, которому нужно отправить отчёт.
+  int64 userId = 2;
+}

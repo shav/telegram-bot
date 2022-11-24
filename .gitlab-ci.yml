@@ -1,0 +1,33 @@
+default:
+  image: golang:latest
+
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  script:
+    - make build
+
+test:
+  stage: test
+  script:
+    - go install github.com/pressly/goose/v3/cmd/goose@latest
+    - goose -s -dir "$DB_MIGRATIONS_PATH" postgres "$TELEGRAM_BOT_DB_CONNECTION_STRING" up
+    - make test-ci
+  services:
+    - postgres:12.2-alpine
+    - redis:7.0
+  variables:
+    POSTGRES_DB: $POSTGRES_DB
+    POSTGRES_USER: $POSTGRES_USER
+    POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+    DB_MIGRATIONS_PATH: ./db/migrations
+    TELEGRAM_BOT_DB_CONNECTION_STRING: host=postgres user=$POSTGRES_USER password=$POSTGRES_PASSWORD dbname=$POSTGRES_DB sslmode=disable
+    TELEGRAM_BOT_CACHE_CONNECTION_STRING: redis:6379
+
+lint:
+  stage: test
+  script:
+    - make lint

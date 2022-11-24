@@ -1,0 +1,4 @@
+**/mocks/** -diff
+**/mock/** -diff
+**/*_easyjson.go -diff
+**/generated/** -diff

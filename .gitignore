@@ -1,0 +1,6 @@
+NUL
+/bin
+/.vscode
+/.idea
+/config/**/config.yaml
+/docker/**/data

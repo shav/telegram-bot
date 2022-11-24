@@ -1,0 +1,12 @@
+version: '2'
+services:
+  redis-test:
+    image: redis:7.0
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_PORT_NUMBER=6380
+    ports:
+      - 6380:6379
+    volumes:
+      - ./data:/data
+      - ../redis.conf:/usr/local/etc/redis/redis.conf

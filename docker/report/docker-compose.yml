@@ -1,0 +1,14 @@
+version: '2'
+services:
+  telegram-bot-report:
+    image: telegram-bot-report:1.0
+    volumes:
+      - ../../config/report/config.yaml:/app/config.yaml
+    environment:
+      - JAEGER_AGENT_HOST=jaeger
+    ports:
+      - 8081:8081
+networks:
+  default:
+    name: tgbot-network
+    external: true

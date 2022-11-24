@@ -1,0 +1,18 @@
+version: v1
+plugins:
+  - name: go
+    out: ./api/generated
+    opt:
+      - paths=source_relative
+    strategy: directory
+  - name: go-grpc
+    out: ./api/generated
+    opt:
+      - paths=source_relative
+    strategy: directory
+  - name: grpc-gateway
+    out: ./api/generated
+    opt:
+      - paths=source_relative
+      - generate_unbound_methods=true
+

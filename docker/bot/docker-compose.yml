@@ -1,0 +1,14 @@
+version: '2'
+services:
+  telegram-bot-finance:
+    image: telegram-bot-finance:1.0
+    volumes:
+      - ../../config/bot/config.yaml:/app/config.yaml
+    environment:
+      - JAEGER_AGENT_HOST=jaeger
+    ports:
+      - 8080:8080
+networks:
+  default:
+    name: tgbot-network
+    external: true
